@@ -201,7 +201,7 @@
         Authorization: "Bearer 563492ad6f9170000100000143fb3b8fa3834663ac6b492917159277"
       }
     }
-
+    let j = 0
     function clicked(value) {
       console.log(value)
       fetch('https://api.pexels.com/v1/search?query=' + value, options)
@@ -216,7 +216,7 @@
             const parent = document.querySelector("#card > .row")
             const kid = document.createElement("div")
             parent.appendChild(kid)
-            kid.className = "col-md-4"
+            kid.className = "col-md-4 kid"
             kid.innerHTML = `<div class="card mb-4 shadow-sm">
                 <img
                   class="bd-placeholder-img card-img-top"
@@ -249,8 +249,9 @@
                         View
                       </button>
                       <button
+                      value = ${j}
                         type="button"
-                        class="btn btn-sm btn-outline-secondary"
+                        class="btn btn-sm btn-outline-secondary hide"
                       >
                         hide
                       </button>
@@ -258,9 +259,20 @@
                     <small class="text-muted">${Pics[i].id}</small>
                   </div>
                 </div>
-              </div>`
-          }
-        })
+              </div>` 
+              j++
+            }
+            hide = document.querySelectorAll(".hide")
+            for(let h=0; h<hide.length; h++){
+            hide[h].addEventListener('click', function(e){
+              
+              value = e.target.value
+              console.log(value)
+              let divs = document.querySelectorAll(".kid")
+              divs[value].style.display = "none"
+              
+            },false)
+    }})
         .catch(err => console.error(err))
     }
 
